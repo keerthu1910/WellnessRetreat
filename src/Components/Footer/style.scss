@@ -1,0 +1,9 @@
+.footer-container{
+    text-align: center;
+    padding: 15px;
+    @media (max-width:425px){
+       position: sticky;
+       bottom: 0;
+       background-color: #ffffff;
+    }
+}

@@ -1,0 +1,11 @@
+.navbar-container{
+    background-color: #1b3252;
+    color:#ffffff;
+    padding:1em;
+    .title{
+        font-size: x-large;
+        @media (max-width:425px){
+            text-align: center;
+        }
+    }
+}
