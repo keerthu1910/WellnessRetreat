@@ -8,7 +8,8 @@ export const Retreatdetails = () => {
     const [showFilteredData,setShowFilteredData] = useState('');
     const [filteredData,setFilteredData] = useState([]);
     const [searchedData,setSearchedData] = useState([]);
-
+    const location = ['Delhi','Goa','Rishikesh','Varanasi','Pune','Agra','Chennai','Kolkata','Hyderabad','Mumbai','Kerala'];
+    const retreattype = ['yoga', 'diet','fitness','weight loss','camp','mental wellness','pre-natal','post-natal']
     const handleChange = (filterparameter) => {
         setShowFilteredData('filtereddata');
         axios.get(`/retreats?filter=${filterparameter}`)
@@ -16,6 +17,12 @@ export const Retreatdetails = () => {
                 .catch(err=>{alert('No data found')})
         }
 
+    const handleLocation = (locationparameter) => {
+        setShowFilteredData('filtereddata');
+        axios.get(`/retreats?location=${locationparameter}`)
+            .then(response=>setFilteredData(response.data))
+                .catch(err=>alert('No data found'))
+    }    
     const handleSearch = (searchparameter) => {
         setShowFilteredData('searcheddata');
         axios.get(`/retreats?search=${searchparameter}`)
@@ -53,16 +60,21 @@ export const Retreatdetails = () => {
                         <option value='2023-2024'>2023-2024</option>
                         <option value='2024-2025'>2024-2025</option>
                     </select>
+                    <select id='retrteat-location' name='retreat-location' onChange={(e)=>handleLocation(e.target.value)}>
+                    <option value=''>Filter by Location</option>
+                        {
+                            location.map((item,index)=>(
+                                <option value={item} key={index}>{item}</option>
+                            ))
+                        }
+                    </select>
                     <select id='retreat-type' name='retreat-type' onChange={(e)=>handleChange(e.target.value)}>
-                        <option value=''>Filter by type</option>
-                        <option value='yoga'>Yoga</option>
-                        <option value='diet'>Diet</option>
-                        <option value='fitness'>Fitness</option>
-                        <option value='weight loss'>Weight Loss</option>
-                        <option value='camp'>Camp</option>
-                        <option value='mental wellness'>Mental wellness</option>
-                        <option value='pre-natal'>Pre-natal</option>
-                        <option value='post-natal'>Post-natal</option>
+                         <option value=''>Filter by Type</option>
+                        {
+                            retreattype.map((item,index)=>(
+                                <option value={item} key={index}>{item}</option>
+                            ))
+                        }
                     </select>
                 </div>
                 <div className='search-container'>
